@@ -1,0 +1,84 @@
+.index-title {
+  margin-top: 0;
+  margin-bottom: 5rem;
+  text-align: center;
+  font-size: 5rem;
+  color: #E18962; }
+
+.index-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: url(../img/bg.png) no-repeat left -10%, #F7E5D9 url(../img/bg-r.png) no-repeat right 130%; }
+
+.authorization-form {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  margin: 0 auto; }
+  .authorization-form__group {
+    width: 100%;
+    margin-bottom: 3rem; }
+    .authorization-form__group > label {
+      font-size: 1.7rem;
+      color: #E18962; }
+    .authorization-form__group > select {
+      display: block;
+      width: 100%;
+      height: 3rem;
+      margin-top: 1rem;
+      border: none;
+      border-bottom: 2px solid #717A99;
+      background-color: #F7E5D9; }
+      .authorization-form__group > select:focus {
+        border-bottom: 2px solid #6F8755; }
+    .authorization-form__group > select {
+      color: #717A99;
+      font-size: 1.5rem; }
+  .authorization-form__invalid {
+    position: absolute;
+    color: tomato; }
+  .authorization-form .has-error input {
+    border-bottom: 2px solid tomato; }
+
+.login-btn {
+  border: none;
+  height: 3rem;
+  font-size: 1.7rem;
+  color: #F7E5D9;
+  background-color: #E18962;
+  border-radius: 7px; }
+  .login-btn:hover {
+    box-shadow: 0 0 10px rgba(225, 137, 98, 0.5);
+    transition: 0.2s; }
+
+.password-input {
+  display: block;
+  width: 100%;
+  height: 3rem;
+  margin-top: 1rem;
+  color: #717A99;
+  font-size: 1.5rem;
+  border: none;
+  border-bottom: 2px solid #717A99;
+  background-color: #F7E5D9; }
+  .password-input::-webkit-input-placeholder {
+    color: #717A99;
+    font-size: 1.5rem; }
+  .password-input::-moz-placeholder {
+    color: #717A99;
+    font-size: 1.5rem; }
+  .password-input:-ms-input-placeholder {
+    color: #717A99;
+    font-size: 1.5rem; }
+  .password-input::-ms-input-placeholder {
+    color: #717A99;
+    font-size: 1.5rem; }
+  .password-input::placeholder {
+    color: #717A99;
+    font-size: 1.5rem; }
+  .password-input:focus {
+    border-bottom: 2px solid #6F8755; }
+  .password-input--invalid {
+    border-bottom: 2px solid tomato; }
