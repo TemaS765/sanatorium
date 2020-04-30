@@ -64,34 +64,29 @@ $(document).ready(function () {
   });
 
   // Навигация в header
-  $('#nav-customers').on('click', () => {
-    $('#nav-customers').addClass('nav__item--active');
-    $('#nav-reservation').removeClass('nav__item--active');
-    $('#nav-reports').removeClass('nav__item--active');
 
-    $('.customers').removeClass('none');
-    $('.reservation').addClass('none');
-    $('.reports').addClass('none');
-  })
+  // При нажатии на любой элемент с классом 'nav__item'
+  $('.nav__item').on('click', event => {
+    let navItems = $('.nav__item');
 
-  $('#nav-reservation').on('click', () => {
-    $('#nav-reservation').addClass('nav__item--active');
-    $('#nav-customers').removeClass('nav__item--active');
-    $('#nav-reports').removeClass('nav__item--active');
-
-    $('.reservation').removeClass('none');
-    $('.customers').addClass('none');
-    $('.reports').addClass('none');
-  })
-
-  $('#nav-reports').on('click', () => {
-    $('#nav-reports').addClass('nav__item--active');
-    $('#nav-reservation').removeClass('nav__item--active');
-    $('#nav-customers').removeClass('nav__item--active');
-
-    $('.reports').removeClass('none');
-    $('.reservation').addClass('none');
-    $('.customers').addClass('none');
+    /*
+     * У всех елементов убираем класс отвечающий за внешний вид активного элемента.
+     * Даём данный класс именно тому элементу на, который нажал пользователь
+     */ 
+    navItems.removeClass('nav__item--active');
+    event.currentTarget.classList.add('nav__item--active');
+    /*
+     * Всё так же с начало забираем класс активного элемента,
+     * потом даём определённому элементу исходя и события клика
+     */
+    $('.section').removeClass('section--active');
+    let i = 0;
+    while(i < navItems.length){
+      if (navItems[i] == event.target) {
+        $('#section-' + (i + 1)).addClass('section--active');
+      }
+      i++;
+    }  
   })
 
   /*
