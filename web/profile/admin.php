@@ -94,25 +94,25 @@ if (!$_SESSION['admin']) {
 
             <div class="customers__table-more">
               <!-- Паспортные данные -->
-              <div class="customers__passport">
+              <div class="customers__passport more-value">
                 <span>Паспортные данные: </span><div class="value"><!-- Значение из БЗ --></div>
               </div>
               <!-- Адресс -->
-              <div class="customers__address">
+              <div class="customers__address more-value">
                 <span>Адресс: </span><div class="value"><!-- Значение из БЗ --></div>
               </div>
               <!-- С какого по какое находится в санатории -->
-              <div class="data">
+              <div class="customers__data more-value">
                 <span>В санатории: </span><div class="value"><!-- Значение из БЗ --></div>
               </div>
 
               <!-- Лечение, назначаемое врачём терапевтом -->
-              <div class="customers__treatment">
+              <div class="customers__treatment more-value">
                 <span>Лечение: </span><div class="value"><!-- Значение из БЗ --></div>
               </div>
               
               <!-- Наличие справок -->
-              <div class="customers__references"><span>Наличие справок: </span>
+              <div class="customers__references more-value"><span>Наличие справок: </span>
                 <div class="value">
                   <!-- 
                     <img src="../assets/img/check.svg" alt="" style="width: 3rem;"> // если есть 
@@ -122,23 +122,60 @@ if (!$_SESSION['admin']) {
               </div>
 
               <!-- Диета, назначаемая врачём терапевтом -->
-              <div class="customers__diet">
+              <div class="customers__diet more-value">
                 <span>Диета: </span><div class="value"><!-- Значение из БЗ --></div>
               </div>
 
               <!-- График лечения, Выстраиваемый мед.работником -->
-              <div class="customers__schedule">
+              <div class="customers__schedule more-value">
                 <span>График лечения: </span><div class="value"><!-- Значение из БЗ --></div>
               </div> 
 
+              <div class="services">
+                <!-- Список уже добавленных услуг -->
+                <div class="services__list">
+                  <div class="services__list-item">
+                    <span class=""><!-- Услуга --></span>
+                    <span class=""><!-- Дата --></span>
+                    <span class=""><!-- Стоимость --></span>
+                    <button class="services__del">
+                      <img src="../assets/img/del.svg" alt="Удалить">
+                    </button>
+                  </div>
+                  <!-- /.services__list-item -->
+                  
+                </div>
+                <!-- /.services__list -->
+
+                <form action="" method="POST" class="services__form">
+                  <select name="service" id="service"  class="services__input" required>
+                    <option value="" disabled selected hidden class="first-option">Выберите услугу</option>
+                    <option>Услуга1</option>
+                    <option>Услуга2</option>
+                    <option>Услуга3</option>
+                    <option>Услуга4</option>
+                  </select>
+
+                  <input type="date" name="service-date" class="services__input" required>
+                  <input type="number" name="service-cost" class="services__input" placeholder="Цена" required min="0">
+                  <button class="services__form-btn-submit">Добавить</button>
+                </form>
+
+              </div>
+              <!-- /.services -->
+
+              <div class="customers__button-box">
+                <button class="customers__button services-btn">Дополнительные услуги</button>
+                <button class="customers__button del-btn">Удалить</button>
+              </div>
+              <!-- /.customers__button-box -->
             </div>
             <!-- /.customers__table-more -->
           </div>
           <!-- /.customers__table-item -->
-            
         </div>
         <!-- /.customers__table -->
-
+        
       </div>
       <!-- /.container -->
     </section>
@@ -183,11 +220,69 @@ if (!$_SESSION['admin']) {
           <button class="reservation__button">Зарегистрировать</button>
         </form>
         <!-- /.reservation__form -->
+
+        <h2 class="reservation__title">Комнаты</h2>
+        <div class="rooms">
+          <form action="" class="rooms__form">
+            <span>С какого по какое:</span>
+            <input type="date" name="roomsDateStart" class="rooms__input">
+            <input type="date" name="roomsDateEnd" class="rooms__input">
+            <button class="rooms__btn-submit">Узнать</button>
+          </form>
+          <!-- /.rooms__form -->
+
+          <!-- Корпус -->
+          <div class="rooms__home">
+            <div class="rooms__line">
+              <span>Корпус <!-- Буква корпуса А-Д --></span>
+              <div class="">
+                <img src="../assets/img/arrow.svg" alt="" class="rooms__more-btn">
+              </div>
+            </div>
+            <!-- /.rooms__line -->
+            <div class="rooms__more">
+
+              <div class="room">
+                <span class="room__number"><!-- Номер комнаты --></span>
+                <div class="room__checks">
+                  <div class="room__check"></div><!-- Место в комнате, если место занято то класс лист "room__check room__check--busy" -->
+                  <div class="room__check"></div>
+                  <div class="room__check"></div>
+                  <div class="room__check"></div>
+                </div>
+                <!-- /.room__checks -->
+                
+              </div>
+              <!-- /.room -->
+            </div>
+            <!-- /.rooms__more -->
+
+          </div>
+          <!-- /.rooms__home -->
+
+        </div>
+        <!-- /.rooms -->
       </div>
       <!-- /.container -->
     </section>
+
     <section class="reports section" id="section-3">
-      отчёты
+      <div class="container">
+        <h2 class="reservation__title">Статистика</h2>
+        <div class="statistics">
+          <div class="statistics__line">
+            Клиентов за всё время: <span class="statistics__value"><!-- Значение --></span> 
+          </div>
+          <!-- /.statistics__line -->
+          <div class="statistics__line">
+            Клиентов за последний год: <span class="statistics__value"><!-- Значение --></span>
+          </div>
+          <!-- /.statistics__line -->
+          
+        </div>
+        <!-- /.statistics -->
+      </div>
+      <!-- /.container -->
     </section>
   </main>
 
