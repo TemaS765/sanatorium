@@ -39,7 +39,8 @@
   .authorization-form__invalid {
     position: absolute;
     color: tomato; }
-  .authorization-form .has-error input {
+  .authorization-form .has-error input,
+  .authorization-form .has-error select {
     border-bottom: 2px solid tomato; }
 
 .login-btn {

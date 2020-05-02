@@ -6,6 +6,7 @@ use app\models\SignupForm;
 use app\models\User;
 use Yii;
 use yii\filters\AccessControl;
+use yii\helpers\VarDumper;
 use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
@@ -30,13 +31,7 @@ class SiteController extends Controller
                         'roles' => ['@'],
                     ],
                 ],
-            ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'logout' => ['post'],
-                ],
-            ],
+            ]
         ];
     }
 
@@ -63,7 +58,11 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+	    if (Yii::$app->user->isGuest) {
+        	return $this->redirect('/site/login');
+        }
+	    
+	    return $this->redirect('/site/cabinet');
     }
 
     /**
@@ -83,9 +82,7 @@ class SiteController extends Controller
         }
 
         $model->password = '';
-        return $this->render('login', [
-            'model' => $model,
-        ]);
+        return $this->render('login', compact('model'));
     }
 
     /**
@@ -143,5 +140,10 @@ class SiteController extends Controller
 	    }
 	
 	    return $this->render('signup', compact('model'));
+	}
+	
+	public function actionCabinet()
+	{
+		return $this->render('cabinet');
 	}
 }

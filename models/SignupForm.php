@@ -12,13 +12,13 @@ class SignupForm extends Model {
 	public function rules() {
 		return [
 			[['username', 'password'], 'required', 'message' => 'Заполните поле'],
-			['username', 'unique', 'targetClass' => User::className(),  'message' => 'Этот логин уже занят'],
+			['username', 'unique', 'targetClass' => User::className(),  'message' => 'Пользователь уже существует'],
 		];
 	}
 	
 	public function attributeLabels() {
 		return [
-			'username' => 'Логин',
+			'username' => 'Пользователь',
 			'password' => 'Пароль',
 		];
 	}

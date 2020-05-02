@@ -4,7 +4,7 @@ $(document).ready(function () {
   // Маска для номера телефона
   $('[type=tel]').mask('+7 (000) 000-00-00');
   // Авторизация
-  $('.login-btn').click(function (e) {
+  /*$('.login-btn').click(function (e) {
     e.preventDefault();
 
     $(`input`).removeClass('error');
@@ -61,7 +61,7 @@ $(document).ready(function () {
       $('.authorization-form__invalid').removeClass('none');
     }
 
-  });
+  });*/
 
   // Навигация в header
   $('#nav-customers').on('click', () => {

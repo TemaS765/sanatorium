@@ -29,17 +29,19 @@ $this->title = 'Авторизация';
 		    'method' => 'POST'
 	    ]); ?>
 	
-	    <?= $form->field($model, 'username')->dropDownList([
-		    'admin' => 'Администратор санатория',
-		    'admin1' => 'Вожатый',
-		    'admin2' => 'Врач-терапевт',
-		    'admin3' => 'Медицинский работник',
-		    'admin4' => 'Повар'
-	    ],
-		    [
-			    'name' => 'login',
-			    'id' => 'login',
-		    ]
+	    <?= $form->field($model, 'username',['errorOptions' => ['class' => 'authorization-form__invalid']])->dropDownList(
+	            $model->getUserForSelect(),
+                [
+			        'id' => 'login',
+                    'prompt' => [
+                            'text' => 'Выберите пользователя',
+                        'options' => [
+                            'value' => '',
+                            'class' => 'prompt',
+                            'disable' => true
+                        ]
+                    ]
+                ]
 	    ) ?>
 	    <?= $form->field(
 	            $model,

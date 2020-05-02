@@ -4,6 +4,7 @@ namespace app\models;
 
 use Yii;
 use yii\base\Model;
+use yii\helpers\VarDumper;
 
 /**
  * LoginForm is the model behind the login form.
@@ -80,5 +81,21 @@ class LoginForm extends Model
         }
 
         return $this->_user;
+    }
+	
+	/**
+	 * Получить список пользователей для вывода в поле select
+	 * @return array
+	 *         array['role'] Роль пользователя
+	 *         array['username'] Имя пользователя
+	 */
+    public function getUserForSelect()
+    {
+    	$userList = [];
+    	$users = User::find()->all();
+    	foreach ($users as $user) {
+		    $userList[$user->username] = $user->username;
+	    }
+	    return $userList;
     }
 }
