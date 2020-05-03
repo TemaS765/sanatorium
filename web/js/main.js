@@ -1,1 +1,121 @@
-$(document).ready(function(){(new WOW).init(),$("[type=tel]").mask("+7 (000) 000-00-00"),$(".login-btn").click(function(e){e.preventDefault(),$("input").removeClass("error");let t=$('select[name="login"]').val(),a=$('input[name="password"]').val(),s=!1;["pass1","pass2","pass3","pass4","pass5"].forEach(e=>{["Администратор санатория","Вожатый","Врач-терапевт","Медицинский работник","Повар"].forEach(o=>{t==o&&a==e&&(s=!0)})}),s?($(".index-main").addClass("animated"),$(".index-main").addClass("fadeOut"),setTimeout(()=>{$.ajax({url:"vendor/signin.php",type:"POST",dataType:"json",data:{login:t,password:a},success(e){console.log("data: ",e),"admin"==e.status?document.location.href="/Saulik/profile/admin.php":"counselor"==e.status?document.location.href="/Saulik/profile/counselor.php":"doctor"==e.status?document.location.href="/Saulik/profile/doctor.php":"medicalWorker"==e.status?document.location.href="/Saulik/profile/medicalWorker.php":"cook"==e.status&&(document.location.href="/Saulik/profile/cook.php")}})},800)):($(".password-input").addClass("password-input--invalid"),$(".authorization-form__invalid").removeClass("none"))}),$(".nav__item").on("click",e=>{let t=$(".nav__item");t.removeClass("nav__item--active"),e.currentTarget.classList.add("nav__item--active"),$(".section").removeClass("section--active");let a=0;for(;a<t.length;)t[a]==e.target&&$("#section-"+(a+1)).addClass("section--active"),a++}),$(".customers__table-item").on("click",e=>{"customers__more-arrow"!=e.target.className&&"customers__more-arrow customers__more-arrow--active"!=e.target.className||(e.target.classList.toggle("customers__more-arrow--active"),e.delegateTarget.children[1].classList.toggle("customers__table-more--active"))}),$(".customers__table-more").on("click",e=>{"сustomers__button services-btn"!=e.target.className&&"customers__button services-btn"!=e.target.className||e.delegateTarget.children[7].classList.toggle("services--active")}),$(".rooms__home").on("click",e=>{"rooms__more-btn"!=e.target.className&&"rooms__more-btn rooms__more-btn--active"!=e.target.className||(e.target.classList.toggle("rooms__more-btn--active"),e.delegateTarget.children[1].classList.toggle("rooms__more--active"))})});
+$(document).ready(function () {
+  // Инициализация библиотеки WOW
+  new WOW().init();
+  // Маска для номера телефона
+  $('[type=tel]').mask('+7 (000) 000-00-00');
+  // Авторизация
+  $('.login-btn').click(function (e) {
+    e.preventDefault();
+
+    $(`input`).removeClass('error');
+
+    let login = $('select[name="login"]').val(),
+      password = $('input[name="password"]').val();
+
+
+    let validPass = false;
+    ['pass1', 'pass2', 'pass3', 'pass4', 'pass5'].forEach(element => {
+      ['Администратор санатория', 'Вожатый', 'Врач-терапевт', 'Медицинский работник', 'Повар'].forEach(elem => {
+        if (login == elem && password == element) {
+          validPass = true;
+        }
+      })
+    })
+
+
+    if (validPass) {
+      $('.index-main').addClass('animated');
+      $('.index-main').addClass('fadeOut');
+
+      setTimeout(() => {
+        $.ajax({
+          url: 'vendor/signin.php',
+          type: 'POST',
+          dataType: 'json',
+          data: {
+            login: login,
+            password: password
+          },
+          success(data) {
+            if (data.status == 'admin') {
+              document.location.href = '/Saulik/profile/admin.php';
+            } else if (data.status == 'counselor') {
+              document.location.href = '/Saulik/profile/counselor.php';
+            } else if (data.status == 'doctor') {
+              document.location.href = '/Saulik/profile/doctor.php';
+            } else if (data.status == 'medicalWorker') {
+              document.location.href = '/Saulik/profile/medicalWorker.php';
+            } else if (data.status == 'cook') {
+              document.location.href = '/Saulik/profile/cook.php';
+            } else {
+
+            }
+
+          }
+        });
+      }, 800);
+
+    } else {
+      $('.password-input').addClass('password-input--invalid');
+      $('.authorization-form__invalid').removeClass('none');
+    }
+
+  });
+
+  // Навигация в header
+
+  // При нажатии на любой элемент с классом 'nav__item'
+  $('.nav__item').on('click', event => {
+    let navItems = $('.nav__item');
+
+    /*
+     * У всех елементов убираем класс отвечающий за внешний вид активного элемента.
+     * Даём данный класс именно тому элементу на, который нажал пользователь
+     */ 
+    navItems.removeClass('nav__item--active');
+    event.currentTarget.classList.add('nav__item--active');
+    /*
+     * Всё так же с начало забираем класс активного элемента,
+     * потом даём определённому элементу исходя и события клика
+     */
+    $('.section').removeClass('section--active');
+    let i = 0;
+    while(i < navItems.length){
+      if (navItems[i] == event.target) {
+        $('#section-' + (i + 1)).addClass('section--active');
+      }
+      i++;
+    }  
+  })
+
+
+  // Список клиентов
+  $('.customers__table-item').on('click', (e) => {
+    if (e.target.className == 'customers__more-arrow' || e.target.className == 'customers__more-arrow customers__more-arrow--active') {
+      e.target.classList.toggle('customers__more-arrow--active');
+      e.delegateTarget.children['1'].classList.toggle('customers__table-more--active'); 
+    }
+  })
+
+  // Дополнительные услуги
+  $('.customers__table-more').on('click', (e) => {
+    if (e.target.className == 'сustomers__button services-btn' || e.target.className == 'customers__button services-btn') {
+      e.delegateTarget.children['7'].classList.toggle('services--active'); 
+    }
+  })
+
+  // Таблица с комнатоми
+  $('.rooms__home').on('click', (e) => {
+    if (e.target.className == 'rooms__more-btn' || e.target.className == 'rooms__more-btn rooms__more-btn--active') {    
+      e.target.classList.toggle('rooms__more-btn--active');
+      e.delegateTarget.children['1'].classList.toggle('rooms__more--active'); 
+    }
+  })
+
+  // Автоматический вывод цены услуги
+  $("#service").change(function(){
+    $('.services__cost')[0].innerHTML = $(this).children("option:selected")["0"].value + " руб.";
+  });
+  
+  
+});

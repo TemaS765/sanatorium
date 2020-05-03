@@ -143,21 +143,27 @@ if (!$_SESSION['admin']) {
                     </button>
                   </div>
                   <!-- /.services__list-item -->
-                  
                 </div>
                 <!-- /.services__list -->
 
-                <form action="" method="POST" class="services__form">
-                  <select name="service" id="service"  class="services__input" required>
-                    <option value="" disabled selected hidden class="first-option">Выберите услугу</option>
-                    <option>Услуга1</option>
-                    <option>Услуга2</option>
-                    <option>Услуга3</option>
-                    <option>Услуга4</option>
-                  </select>
-
-                  <input type="date" name="service-date" class="services__input" required>
-                  <input type="number" name="service-cost" class="services__input" placeholder="Цена" required min="0">
+                <form method="POST" class="services__form">
+                  <div class="input-group">
+                    <select name="service" id="service"  class="services__input" required>
+                      <option value="" disabled selected hidden class="first-option">Выберите услугу</option>
+                      <option value="500">Индивидуальный трансфер</option>
+                      <option value="100">Сувенирная продукция</option>
+                    </select>
+                    <span name="cost" class="services__cost"></span> 
+                  </div>
+                  <!-- /.input-group -->
+                  <div class="input-group">
+                    <input type="date" name="serviceDate" id="serviceDate" class="services__input" required>
+                  </div>
+                  <!-- /.input-group -->
+                  <div class="input-group">
+                    <input type="text" name="executor" id="executor" class="services__input" placeholder="Исполнитель" required>
+                  </div>
+                  <!-- /.input-group -->
                   <button class="services__form-btn-submit">Добавить</button>
                 </form>
 
@@ -166,6 +172,7 @@ if (!$_SESSION['admin']) {
 
               <div class="customers__button-box">
                 <button class="customers__button services-btn">Дополнительные услуги</button>
+                <a href="" class="customers__button">Путёвка</a>
                 <button class="customers__button del-btn">Удалить</button>
               </div>
               <!-- /.customers__button-box -->
@@ -185,36 +192,42 @@ if (!$_SESSION['admin']) {
       <div class="container">
         <h2 class="reservation__title">Анкета гостя</h2>
         <form action="" class="reservation__form">
-          <div class="reservation__input-group">
-            <input type="text" name="fullName" class="reservation__input" autocomplete="off" placeholder="ФИО">
+          <div class="reservation__input-group input-group">
+            <input type="text" name="name" class="reservation__input" autocomplete="off" placeholder="ФИО">
           </div>
           
-          <div class="reservation__input-group">
+          <div class="reservation__input-group input-group">
             <input type="text" name="passport" class="reservation__input" autocomplete="off" placeholder="Паспортные данные">
           </div>
 
-          <div class="reservation__input-group reservation__input-group--column">
+          <div class="reservation__input-group">
             <label for="" class="reservation__label">Дата рождения:</label>
-            <input type="date" name="dateOfBirth" class="reservation__input" autocomplete="off" placeholder="Дата рождения">
+            <div class="input-group" style="margin: 0 2rem 0 auto;">
+              <input type="date" name="dateOfBirth" class="reservation__input" autocomplete="off" placeholder="Дата рождения">
+            </div>
           </div>
 
-          <div class="reservation__input-group" >
+          <div class="reservation__input-group input-group" >
             <input type="tel" name="phone" class="reservation__input" autocomplete="off" placeholder="Номер телефона">
           </div>
 
-          <div class="reservation__input-group">
+          <div class="reservation__input-group input-group">
             <input type="text" name="address" class="reservation__input" autocomplete="off" placeholder="Адрес">
           </div>
 
           <div class="reservation__input-group">
-            <input type="text" name="home" class="reservation__input" autocomplete="off" placeholder="Корпус">
-            <input type="text" name="room" class="reservation__input" autocomplete="off" placeholder="Комната">
+            <div class="input-group">
+              <input type="text" name="house" class="reservation__input" autocomplete="off" placeholder="Корпус">
+            </div>
+            <div class="input-group" style="margin: 0 2rem 0 auto;">
+              <input type="number" name="room" class="reservation__input" autocomplete="off" placeholder="Комната">
+            </div>
           </div>
 
-          <div class="reservation__input-group">
+          <div class="reservation__input-group input-group">
             <label for="" class="reservation__label">С какого по какое:</label>
-            <input type="date" name="dataStart" class="reservation__input" autocomplete="off" placeholder="C">
-            <input type="date" name="dataEnd" class="reservation__input" autocomplete="off" placeholder="По">
+            <input type="date" name="dateStart" class="reservation__input" autocomplete="off" placeholder="C">
+            <input type="date" name="dateEnd" class="reservation__input" autocomplete="off" placeholder="По">
           </div>
           
           <button class="reservation__button">Зарегистрировать</button>
@@ -225,8 +238,9 @@ if (!$_SESSION['admin']) {
         <div class="rooms">
           <form action="" class="rooms__form">
             <span>С какого по какое:</span>
+            <div class="input-group">
             <input type="date" name="roomsDateStart" class="rooms__input">
-            <input type="date" name="roomsDateEnd" class="rooms__input">
+            <input type="date" name="roomsDateEnd" class="rooms__input"></div>
             <button class="rooms__btn-submit">Узнать</button>
           </form>
           <!-- /.rooms__form -->
@@ -243,17 +257,17 @@ if (!$_SESSION['admin']) {
             <div class="rooms__more">
 
               <div class="room">
-                <span class="room__number"><!-- Номер комнаты --></span>
+                <span class="room__number">1<!-- Номер комнаты --></span>
                 <div class="room__checks">
-                  <div class="room__check"></div><!-- Место в комнате, если место занято то класс лист "room__check room__check--busy" -->
+                  <div class="room__check room__check--busy"></div><!-- Место в комнате, если место занято то класс лист "room__check room__check--busy" -->
                   <div class="room__check"></div>
                   <div class="room__check"></div>
                   <div class="room__check"></div>
                 </div>
                 <!-- /.room__checks -->
-                
               </div>
               <!-- /.room -->
+
             </div>
             <!-- /.rooms__more -->
 
@@ -278,7 +292,10 @@ if (!$_SESSION['admin']) {
             Клиентов за последний год: <span class="statistics__value"><!-- Значение --></span>
           </div>
           <!-- /.statistics__line -->
-          
+          <div class="statistics__line">
+            Прогноз клиентов на следующий год: <span class="statistics__value"><!-- Значение --></span>
+          </div>
+          <!-- /.statistics__line -->
         </div>
         <!-- /.statistics -->
       </div>
@@ -286,14 +303,24 @@ if (!$_SESSION['admin']) {
     </section>
   </main>
 
+  <div class="modal">
+    <div class="modal__window">
+      <div class="modal__message"></div>
+    </div>
+  </div>
+  <!-- /.modal -->
+
   <!-- jQuery -->
   <script src="../assets/js/jquery-3.4.1.min.js"></script>
   <!-- WOW -->
   <script src="../assets/js/wow.min.js"></script>
   <!-- jquery.validate -->
   <script src="../assets/js/jquery.validate.min.js"></script>
-  <!-- jquery.mask autocomplete="off" -->
+  <!-- jquery.mask -->
   <script src="../assets/js/jquery.mask.min.js"></script>
+  <!-- valid.js -->
+  <!-- Здесь прописанны валидации форм, а также поведение модального окна с сообщением после отправки формы -->
+  <script src="../assets/js/valid.js"></script>
   <!-- main.js -->
   <script src="../assets/js/main.js"></script>
 </body>
