@@ -18,7 +18,7 @@ class m200501_223944_create_table_customer extends Migration
 			    'phone' => $this->integer(11)->notNull(),
 			    'address' => $this->string(255)->notNull(),
 			    'passport_data' => $this->string(255)->notNull(),
-			    'birth_date' => $this->dateTime()->notNull(),
+			    'birth_date' => $this->date()->notNull(),
 			    'created_date' => $this->dateTime()->notNull()
 		    ]
 	    );

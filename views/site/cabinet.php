@@ -4,7 +4,7 @@
 
 use yii\helpers\Html;
 
-$this->title = 'Авторизация';
+$this->title = Yii::$app->name.' | '.Yii::$app->user->identity->username;
 ?>
 <header class="header">
     <div class="container header__container">
@@ -20,4 +20,9 @@ $this->title = 'Авторизация';
 <main class="main">
     <?= $this->render('cabinet/admin') ?>
 </main>
+<div class="modal">
+    <div class="modal__window">
+        <div class="modal__message"></div>
+    </div>
+</div>
 

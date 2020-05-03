@@ -8,7 +8,8 @@ use yii\i18n\Formatter;
 use yii\validators\DateValidator;
 
 /**
- * OrderForm is the model behind the contact form.
+ * Class OrderForm Форма управления заказом
+ * @package app\models
  */
 class OrderForm extends Model
 {

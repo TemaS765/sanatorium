@@ -4,6 +4,10 @@ namespace app\models;
 
 use yii\base\Model;
 
+/**
+ * Class SignupForm Форма регистрации
+ * @package app\models
+ */
 class SignupForm extends Model {
 	
 	public $username;

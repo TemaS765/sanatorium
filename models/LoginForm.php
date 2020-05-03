@@ -4,21 +4,29 @@ namespace app\models;
 
 use Yii;
 use yii\base\Model;
-use yii\helpers\VarDumper;
 
 /**
- * LoginForm is the model behind the login form.
- *
- * @property User|null $user This property is read-only.
- *
+ * Class LoginForm Форма авторизации
+ * @package app\models
  */
 class LoginForm extends Model
 {
+	/**
+	 * @var string
+	 */
     public $username;
+	/**
+	 * @var string
+	 */
     public $password;
+	/**
+	 * @var bool
+	 */
     public $rememberMe = true;
-
-    private $_user = false;
+	/**
+	 * @var null|User
+	 */
+    private $user = null;
 
 
     /**
@@ -40,11 +48,9 @@ class LoginForm extends Model
 	}
 	
 	/**
-     * Validates the password.
-     * This method serves as the inline validation for password.
-     *
-     * @param string $attribute the attribute currently being validated
-     * @param array $params the additional name-value pairs given in the rule
+     * Валидация пароля
+     * @param string $attribute
+     * @param array $params
      */
     public function validatePassword($attribute, $params)
     {
@@ -58,8 +64,8 @@ class LoginForm extends Model
     }
 
     /**
-     * Logs in a user using the provided username and password.
-     * @return bool whether the user is logged in successfully
+     * Авторизация пользователя
+     * @return bool
      */
     public function login()
     {
@@ -76,11 +82,11 @@ class LoginForm extends Model
      */
     public function getUser()
     {
-        if ($this->_user === false) {
-            $this->_user = User::findByUsername($this->username);
+        if ($this->user === null) {
+            $this->user = User::findByUsername($this->username);
         }
 
-        return $this->_user;
+        return $this->user;
     }
 	
 	/**
@@ -92,7 +98,9 @@ class LoginForm extends Model
     public function getUserForSelect()
     {
     	$userList = [];
+    	/** @var User[] $users */
     	$users = User::find()->all();
+    	
     	foreach ($users as $user) {
 		    $userList[$user->username] = $user->username;
 	    }

@@ -1,5 +1,5 @@
 <?php /* @var $this yii\web\View */ ?>
-<section class="customers">
+<section class="customers section section--active" id="section-1">
     <div class="container">
         <div class="customers__title">Клиенты</div>
         <div class="customers__table">
@@ -40,25 +40,25 @@
 
                 <div class="customers__table-more">
                     <!-- Паспортные данные -->
-                    <div class="customers__passport">
+                    <div class="customers__passport more-value">
                         <span>Паспортные данные: </span><div class="value"><!-- Значение из БЗ --></div>
                     </div>
                     <!-- Адресс -->
-                    <div class="customers__address">
-                        <span>Адрес: </span><div class="value"><!-- Значение из БЗ --></div>
+                    <div class="customers__address more-value">
+                        <span>Адресс: </span><div class="value"><!-- Значение из БЗ --></div>
                     </div>
                     <!-- С какого по какое находится в санатории -->
-                    <div class="data">
+                    <div class="customers__data more-value">
                         <span>В санатории: </span><div class="value"><!-- Значение из БЗ --></div>
                     </div>
 
                     <!-- Лечение, назначаемое врачём терапевтом -->
-                    <div class="customers__treatment">
+                    <div class="customers__treatment more-value">
                         <span>Лечение: </span><div class="value"><!-- Значение из БЗ --></div>
                     </div>
 
                     <!-- Наличие справок -->
-                    <div class="customers__references"><span>Наличие справок: </span>
+                    <div class="customers__references more-value"><span>Наличие справок: </span>
                         <div class="value">
                             <!--
 							  <img src="../assets/img/check.svg" alt="" style="width: 3rem;"> // если есть
@@ -68,20 +68,64 @@
                     </div>
 
                     <!-- Диета, назначаемая врачём терапевтом -->
-                    <div class="customers__diet">
+                    <div class="customers__diet more-value">
                         <span>Диета: </span><div class="value"><!-- Значение из БЗ --></div>
                     </div>
 
                     <!-- График лечения, Выстраиваемый мед.работником -->
-                    <div class="customers__schedule">
+                    <div class="customers__schedule more-value">
                         <span>График лечения: </span><div class="value"><!-- Значение из БЗ --></div>
                     </div>
 
+                    <div class="services">
+                        <!-- Список уже добавленных услуг -->
+                        <div class="services__list">
+                            <div class="services__list-item">
+                                <span class=""><!-- Услуга --></span>
+                                <span class=""><!-- Дата --></span>
+                                <span class=""><!-- Стоимость --></span>
+                                <button class="services__del">
+                                    <img src="/img/del.svg" alt="Удалить">
+                                </button>
+                            </div>
+                            <!-- /.services__list-item -->
+                        </div>
+                        <!-- /.services__list -->
+
+                        <form method="POST" class="services__form">
+                            <div class="input-group">
+                                <select name="service" id="service"  class="services__input" required>
+                                    <option value="" disabled selected hidden class="first-option">Выберите услугу</option>
+                                    <option value="500">Индивидуальный трансфер</option>
+                                    <option value="100">Сувенирная продукция</option>
+                                </select>
+                                <span name="cost" class="services__cost"></span>
+                            </div>
+                            <!-- /.input-group -->
+                            <div class="input-group">
+                                <input type="date" name="serviceDate" id="serviceDate" class="services__input" required>
+                            </div>
+                            <!-- /.input-group -->
+                            <div class="input-group">
+                                <input type="text" name="executor" id="executor" class="services__input" placeholder="Исполнитель" required>
+                            </div>
+                            <!-- /.input-group -->
+                            <button class="services__form-btn-submit">Добавить</button>
+                        </form>
+
+                    </div>
+                    <!-- /.services -->
+
+                    <div class="customers__button-box">
+                        <button class="customers__button services-btn">Дополнительные услуги</button>
+                        <a href="" class="customers__button">Путёвка</a>
+                        <button class="customers__button del-btn">Удалить</button>
+                    </div>
+                    <!-- /.customers__button-box -->
                 </div>
                 <!-- /.customers__table-more -->
             </div>
             <!-- /.customers__table-item -->
-
         </div>
         <!-- /.customers__table -->
 
