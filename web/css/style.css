@@ -881,6 +881,34 @@ a {
     margin-left: 2rem;
     color: #6F8755; }
 
+.accommodation-form {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 265px; }
+  .accommodation-form__checkbox {
+    display: block;
+    height: 35px;
+    width: 30px;
+    cursor: pointer;
+    border: none; }
+  .accommodation-form__submit {
+    opacity: 0;
+    visibility: hidden;
+    display: block;
+    margin-right: 1rem;
+    padding: 0.5rem;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #717A99;
+    border: none;
+    background: #E18962;
+    border-radius: 5px;
+    cursor: pointer; }
+    .accommodation-form__submit--active {
+      opacity: 1;
+      visibility: visible; }
+
 @media screen and (max-width: 1200px) {
   html {
     font-size: 12px; } }

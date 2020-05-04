@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Саулык | Вожатый</title>
+  <link rel="shortcut icon" href="../assets/img/logo.svg" type="image/png">
+
+  <!-- Шрифт Rubik -->
+  <!-- font-family: 'Rubik', sans-serif; -->
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <!-- animate.css -->
+  <!-- Библиотека с анимациями -->
+  <link rel="stylesheet" href="../assets/css/animate.css">
+
+  <!-- style.css -->
+  <!-- Основной CSS файл-->
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+
+<body>
+  <header class="header">
+    <div class="container header__container">
+      <h1 class="header__name">Вожатый</h1>
+      <a href="../vendor/logout.php" class="logout">Выход</a>
+    </div>
+    <!-- /.container -->
+  </header>
+
+  <main class="main">
+    <section class="customers section section--active" id="section-1">
+      <div class="container">
+        <div class="customers__title">Клиенты</div>
+        <div class="customers__table">
+          <div class="customers__table-title">
+            <div class="customers__name-title">ФИО</div>
+            <div class="customers__house-room-title">Комната</div>
+            <div class="customers__phone-title">В санатории</div>
+            <div class="customers__accommodation-title">Размещён</div>
+          </div>
+            
+          <!-- Запись пользователя -->
+          <div class="customers__table-item">
+            <div class="customers__table-line">
+
+              <!-- ФИО -->
+              <div class="customers__name"><!-- Значение из БЗ --></div>
+
+              <!-- Комната -->
+              <div class="customers__house-room"><!-- Значение из БЗ --></div>
+
+              <!-- В санатории -->
+              <div class="customers__data"><!-- Значение из БЗ --></a></div>
+
+              <!-- Размещён ли уже клиент, это отмечает вожатый -->
+              <form action="" class="accommodation-form">
+                <input type="checkbox" name="" class="accommodation-form__checkbox">
+                <button class="accommodation-form__submit">Подтвердить</button>
+              </form>
+            </div>
+            <!-- /.customers__table-line -->
+          </div>
+          <!-- /.customers__table-item -->
+
+        </div>
+        <!-- /.customers__table -->
+        
+      </div>
+      <!-- /.container -->
+    </section>
+    <!-- customers -->
+
+  </main>
+
+  <div class="modal">
+    <div class="modal__window">
+      <div class="modal__message"></div>
+    </div>
+  </div>
+  <!-- /.modal -->
+
+  <!-- jQuery -->
+  <script src="../assets/js/jquery-3.4.1.min.js"></script>
+  <!-- WOW -->
+  <script src="../assets/js/wow.min.js"></script>
+  <!-- jquery.validate -->
+  <script src="../assets/js/jquery.validate.min.js"></script>
+  <!-- jquery.mask -->
+  <script src="../assets/js/jquery.mask.min.js"></script>
+  <!-- valid.js -->
+  <!-- Здесь прописанны валидации форм, а также поведение модального окна с сообщением после отправки формы -->
+  <script src="../assets/js/valid.js"></script>
+  <!-- main.js -->
+  <script src="../assets/js/main.js"></script>
+</body>
+
+</html>

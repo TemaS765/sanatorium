@@ -213,5 +213,36 @@ $(document).ready(function () {
     }
   });
 
+  // Форма на странице вожатого
+  
+  $('.accommodation-form').on('click', (e) => {
+    if (e.target.className == 'accommodation-form__checkbox') {
+      e.delegateTarget['1'].classList.toggle('accommodation-form__submit--active');
+    }
+  })
 
+  $('.accommodation-form').validate({
+    submitHandler: function(form) {
+      $.ajax({
+        type: "POST",
+        url: "", 
+        data: $(form).serialize(),
+
+        // Ошибка отправки запроса
+        error: () => {
+          modal("Ошибка запроса, попробуйте перезагрузить страницу");
+        },
+
+        success: function (response) {
+          if (response["status"] == "OK") {
+            
+          }else{
+            // Ошибка с сервера
+            modal(response["error"]["message"]);
+          }
+        }
+
+      });
+    }
+  });
 });
