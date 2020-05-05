@@ -104,13 +104,4 @@ $(document).ready(function () {
       e.delegateTarget.children['7'].classList.toggle('services--active'); 
     }
   })
-
-  // Таблица с комнатоми
-  $('.rooms__home').on('click', (e) => {
-    if (e.target.className == 'rooms__more-btn' || e.target.className == 'rooms__more-btn rooms__more-btn--active') {    
-      e.target.classList.toggle('rooms__more-btn--active');
-      e.delegateTarget.children['1'].classList.toggle('rooms__more--active'); 
-    }
-  })
-
 });

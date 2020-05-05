@@ -11,11 +11,11 @@ class m200501_230319_create_housing extends Migration
     {
 		$this->db->createCommand(
 			'INSERT INTO housing (name, number_rooms) VALUES '.
-			'(\'А\', 99),'.
-			'(\'Б\', 99),'.
-			'(\'В\', 99),'.
-			'(\'Г\', 99),'.
-			'(\'Д\', 99);'
+			'(\'А\', 50),'.
+			'(\'Б\', 50),'.
+			'(\'В\', 50),'.
+			'(\'Г\', 50),'.
+			'(\'Д\', 50);'
 		)->query();
     }
 
@@ -23,5 +23,4 @@ class m200501_230319_create_housing extends Migration
     {
         $this->truncateTable('housing');
     }
-    
 }

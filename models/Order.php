@@ -2,7 +2,9 @@
 
 namespace app\models;
 
+use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
+use yii\db\Expression;
 
 /**
  * Class Order Заказ
@@ -20,8 +22,29 @@ use yii\db\ActiveRecord;
  */
 class Order extends ActiveRecord
 {
+	/**
+	 * Статус отсутствует
+	 */
+	const STATUS_NONE = 'none';
+	/**
+	 * Статус размещен
+	 */
+	const STATUS_POSTED = 'posted';
+	
 	public static function tableName()
 	{
 		return 'order';
+	}
+	
+	public function behaviors()
+	{
+		return [
+			[
+				'class' => TimestampBehavior::class,
+				'createdAtAttribute' => 'created_date',
+				'updatedAtAttribute' => false,
+				'value' => new Expression('NOW()'),
+			],
+		];
 	}
 }

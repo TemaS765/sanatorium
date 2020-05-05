@@ -28,6 +28,7 @@ class AppAsset extends AssetBundle
         'js/jquery.mask.min.js',
         'js/jquery.validate.min.js',
         'js/main.js',
+        'js/valid.js',
         'js/wow.min.js',
     ];
     public $depends = [

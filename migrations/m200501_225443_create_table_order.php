@@ -18,9 +18,9 @@ class m200501_225443_create_table_order extends Migration
 				'floor' => $this->integer(5)->notNull(),
 				'room' => $this->integer(5)->notNull(),
 				'room_type' => $this->string(1)->notNull(),
-				'status' => $this->string(255)->notNull(),
-				'arrival_date' => $this->dateTime()->notNull(),
-				'departure_date' => $this->dateTime()->notNull(),
+				'status' => 'ENUM(\'none\', \'posted\') DEFAULT \'none\' NOT NULL',
+				'arrival_date' => $this->date()->notNull(),
+				'departure_date' => $this->date()->notNull(),
 				'created_date' => $this->dateTime()->notNull()
 			]
 		);

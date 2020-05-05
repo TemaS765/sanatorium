@@ -2,10 +2,9 @@
 
 namespace app\models;
 
-use Yii;
 use yii\base\Model;
-use yii\i18n\Formatter;
-use yii\validators\DateValidator;
+use yii\helpers\VarDumper;
+use yii\web\HttpException;
 
 /**
  * Class OrderForm Форма управления заказом
@@ -49,11 +48,11 @@ class OrderForm extends Model
 	 * @var string Даты выезда
 	 */
     public $departure_date;
-
-
-    /**
-     * @return array the validation rules.
-     */
+	
+	/**
+	 * Правила валидации
+	 * @return array
+	 */
     public function rules()
     {
         return [
@@ -65,15 +64,19 @@ class OrderForm extends Model
 	            'required'
             ],
             [['full_name', 'passport_data','address'], 'string', 'min' => 1, 'max' => 255],
-            [['phone', 'housing','room'], 'integer'],
-            [['phone'], 'length' => 11],
-            [['birth_date', 'arrival_date', 'departure_date'], 'date', 'format' => DateValidator::TYPE_DATE],
+            [['housing','room'], 'integer', 'integerOnly' => true],
+	        ['housing', 'exist', 'targetClass' => Housing::class, 'targetAttribute' => ['housing' => 'id'], 'message' => 'Корпус неизвестен'],
+	        [['phone'], 'string'],
+            [['phone'], 'filter', 'filter' => 'trim'],
+	        ['phone', 'match', 'pattern' => '/^7\s\([0-9]{3}\)\s[0-9]{3}\-[0-9]{2}\-[0-9]{2}$/', 'message' => 'Телефона, должно быть в формате +7 (XXX) XXX-XX-XX'],
+	        [['birth_date', 'arrival_date', 'departure_date'], 'date', 'format' => 'php:Y-m-d']
         ];
     }
-
-    /**
-     * @return array customized attribute labels
-     */
+	
+	/**
+	 * Наименования для атрибутов
+	 * @return array
+	 */
     public function attributeLabels()
     {
         return [
@@ -89,8 +92,26 @@ class OrderForm extends Model
 
         ];
     }
-    
-    public function save()
+	
+	/**
+	 * Доступные сценарии
+	 * @return array
+	 */
+    public function scenarios()
+    {
+	    return [
+	    	'create' => [
+	    		'full_name', 'passport_data', 'birth_date', 'phone', 'address', 'housing', 'room', 'arrival_date',
+			    'departure_date'
+		    ]
+	    ];
+    }
+	
+	/**
+	 * Сохранение модели (Создание заказа)
+	 * @throws HttpException
+	 */
+	public function save()
     {
     	$customer = new Customer();
         $customer->full_name = $this->full_name;
@@ -101,6 +122,63 @@ class OrderForm extends Model
 	    
 	    $housing = Housing::findOne(['id' => $this->housing]);
 	    
+	    if ($housing === null) {
+		    throw new HttpException(400, "Не удалось загрузить корпус");
+	    }
+	    
+	    $housingSchema = HousingScheme::findOne(['housing_id' => $housing->id, 'room' => $this->room]);
+	    if ($housingSchema === null) {
+		    throw new HttpException(400, "Не удалось загрузить схему размещения корпуса");
+	    }
+	
+	    if (!$this->validateOrder()) {
+		    throw new HttpException(400, "Не удалось создать заказ, все места в данной комнате заняты");
+	    }
+	
+	    if (!$customer->save()) {
+		    throw new HttpException(400, "Не удалось создать клиента");
+	    }
+	    
 	    $order = new Order();
+	    $order->customer_id = $customer->id;
+	    $order->housing_id = $housing->id;
+	    $order->floor = $housingSchema->floor;
+	    $order->room = $this->room;
+	    $order->room_type = $housingSchema->room_type;
+	    $order->arrival_date = $this->arrival_date;
+	    $order->departure_date = $this->departure_date;
+	    
+	    return $order->save();
+    }
+	
+	/**
+	 * Валидация заказа
+	 * @return bool
+	 */
+    public function validateOrder()
+    {
+	    /** @var Order[] $orders */
+	    $orders = Order::find()->where(
+		    '(departure_date BETWEEN :date_from AND :date_to OR arrival_date BETWEEN :date_from AND :date_to) '.
+		    'AND housing_id = :housing_id AND room = :room',
+		    [
+			    ':date_from' => $this->arrival_date,
+			    ':date_to' => $this->departure_date,
+			    ':housing_id' => $this->housing,
+			    ':room' => $this->room
+		    ]
+	    )->all();
+	    
+	    /** @var HousingScheme $housingScheme */
+	    $housingScheme = HousingScheme::findOne(
+		    [
+		    	'housing_id' => $this->housing,
+			    'room' => $this->room
+		    ]
+	    );
+	    
+	    $allowedNumberBooking = (int) $housingScheme->room_type;
+	    
+	    return count($orders) < $allowedNumberBooking ? true : false;
     }
 }

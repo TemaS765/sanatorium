@@ -1,3 +1,23 @@
+/**
+ * Функция сериализации формы
+ * @param form Форма (DOM элемент)
+ * @return Сериализованные данные
+ */
+var serializeForm = function (form) {
+  var formName = form.getAttribute('name'),
+      data = '';
+
+  for(var i = 0; i < form.length; i++) {
+    if (form[i].name) {
+      data += data
+          ? '&'+formName+'['+form[i].name+']='+form[i].value
+          : formName+'['+form[i].name+']='+form[i].value;
+    }
+  }
+
+  return encodeURI(data);
+};
+
 $(document).ready(function () {
   // Функции вывода и закрытия модального окна
   function modal (massage) {
@@ -29,68 +49,97 @@ $(document).ready(function () {
   // Валидайия форм со страницы админа
 
   // Добовление дополнительных услуг
-  $('.services__form').validate({
-    rules: {
-      service: {
-        required: true,
-      },
-      serviceDate: {
-        required: true,
-      },
-      executor: {
-        required: true,
-      },
-    },
-    errorClass: "invalid",
-    messages: {
-      service: {
-        required: "Выберите усугу",
-      },
-      serviceDate:{
-        required: "Выберите дату исполнения",
-      },
-      executor:{
-        required: "Напишите исполнителя",
-      },
-    },
-    submitHandler: function(form) {
-      $.ajax({
-        type: "POST",
-        url: "", 
-        data: // Тоже самое, что отдаёт .serialize(), но пришлось собирать так
-          "&service=" + $('#service').val() + 
-          "&cost=" + $('.services__cost')[0].innerHTML +
-          "&serviceDate=" + $('#serviceDate').val() + 
-          "&executor=" + $('#executor').val(),
-
-        // Ошибка отправки запроса
-        error: () => {
-          modal("Ошибка запроса, попробуйте перезагрузить страницу");
+  $('.services__form').each(function () {
+    $(this).validate({
+      rules: {
+        service: {
+          required: true,
         },
+        customer_id: {
+          required: true,
+        },
+        completion_date: {
+          required: true,
+        },
+        executor: {
+          required: true,
+        },
+      },
+      errorClass: "invalid",
+      messages: {
+        service: {
+          required: "Выберите усугу",
+        },
+        completion_date:{
+          required: "Выберите дату исполнения",
+        },
+        executor:{
+          required: "Напишите исполнителя",
+        },
+      },
+      submitHandler: function(form) {
+        $.ajax({
+          type: "POST",
+          url: "/order-service/create",
+          data: serializeForm(form),
 
-        success: function (response) {
-          if (response["status"] == "OK") {
-            modal("Выполнено успешно");
-            $(form)[0].reset();
-          }else{
-            // Ошибка с сервера
-            modal(response["error"]["message"]);
+          // Ошибка отправки запроса
+          error: (response) => {
+            if (response.responseJSON !== undefined && response.responseJSON.status === 400) {
+              modal(response.responseJSON.message);
+            } else {
+              modal("Ошибка запроса, попробуйте перезагрузить страницу");
+            }
+          },
+
+          success: function (response) {
+            if (response["status"] == "OK") {
+              modal("Выполнено успешно");
+              $(form)[0].reset();
+            }
           }
+        });
+      }
+    });
+  });
+
+  $('.services__del').on('click', (e) => {
+    var $el = $(e.currentTarget),
+        orderId = $el.data('oid');
+
+    $.ajax({
+      type: "POST",
+      url: "/order-service/delete",
+      data: 'id='+orderId,
+
+      // Ошибка отправки запроса
+      error: (response) => {
+        if (response.responseJSON !== undefined && response.responseJSON.status === 400) {
+          modal(response.responseJSON.message);
+        } else {
+          modal("Ошибка запроса, попробуйте перезагрузить страницу");
         }
-      });
-    }
+      },
+
+      success: function (response) {
+        if (response["status"] == "OK") {
+          modal("Выполнено успешно");
+          //$el.closest('.services__list-item').remove();
+        }
+      }
+    });
   });
 
   // Регистрация клиентов
   $('.reservation__form').validate({
     rules: {
-      name: {
+      full_name: {
         required: true,
       },
-      passport: {
+      passport_data: {
         required: true,
       },
-      dateOfBirth: {
+      birth_date: {
         required: true,
       },
       phone: {
@@ -99,30 +148,29 @@ $(document).ready(function () {
       address: {
         required: true,
       },
-      house: {
+      housing: {
         required: true,
-        regex: "^[а-дА-Д']{1,1}$"
       },
       room: {
         required: true,
         range: [1, 50]
       },
-      dateStart: {
+      arrival_date: {
         required: true,
       },
-      dateEnd: {
+      departure_date: {
         required: true,
       },
     },
     errorClass: "invalid",
     messages: {
-      name: {
+      full_name: {
         required: "Заполните ФИО",
       },
-      passport: {
+      passport_data: {
         required: "Заполните паспортные данные",
       },
-      dateOfBirth: {
+      birth_date: {
         required: "Заполните день рождения",
       },
       phone: {
@@ -131,68 +179,95 @@ $(document).ready(function () {
       address: {
         required: "Заполните адрес",
       },
-      house: {
+      housing: {
         required: "Заполните корпус",
-        regex: "Напишите букву (А-Д) "
       },
       room: {
         required: "Заполните комнату",
         range: "Номер комнаты (1-50)"
       },
-      dateStart: {
+      arrival_date: {
         required: "Заполните дату прибывания в санатории",
       },
-      dateEnd: {
-        required: "Заполните дату прибывания в санатории",
+      departure_date: {
+        required: "Заполните дату выезда из санатория",
       },
     },
     submitHandler: function(form) {
       $.ajax({
         type: "POST",
-        url: "", 
-        data: $(form).serialize(),
+        url: "/order/create",
+        data: serializeForm(form),
 
         // Ошибка отправки запроса
-        error: () => {
-          modal("Ошибка запроса, попробуйте перезагрузить страницу");
+        error: (response) => {
+          if (response.responseJSON !== undefined && response.responseJSON.status === 400) {
+            modal(response.responseJSON.message);
+          } else {
+            modal("Ошибка запроса, попробуйте перезагрузить страницу");
+          }
         },
 
         success: function (response) {
-          if (response["status"] == "OK") {
+          if (response.status == "OK") {
             modal("Выполнено успешно");
             $(form)[0].reset();
-          }else{
-            // Ошибка с сервера
-            modal(response["error"]["message"]);
           }
         }
       });
     }
   });
 
+  //Удаление клиента
+  $('.-js-btn-del-customer').on('click', (e) => {
+    var $el = $(e.currentTarget),
+        id = $el.data('cid');
+
+    $.ajax({
+      type: "POST",
+      url: "/customer/delete",
+      data: 'id='+id,
+
+      // Ошибка отправки запроса
+      error: (response) => {
+        if (response.responseJSON !== undefined && response.responseJSON.status === 400) {
+          modal(response.responseJSON.message);
+        } else {
+          modal("Ошибка запроса, попробуйте перезагрузить страницу");
+        }
+      },
+
+      success: function (response) {
+        if (response["status"] == "OK") {
+          modal("Выполнено успешно");
+        }
+      }
+    });
+  });
+
   // Форма поиска свободных комнат 
   $('.rooms__form').validate({
     rules: {
-      roomsDateStart: {
+      date_from: {
         required: true,
       },
-      roomsDateEnd: {
+      date_to: {
         required: true,
       },
     },
     errorClass: "invalid",
     messages: {
-      roomsDateStart: {
+      date_from: {
         required: "Выбирете даты",
       },
-      roomsDateEnd:{
+      date_to:{
         required: "Выбирете даты",
       },
     },
     submitHandler: function(form) {
       $.ajax({
         type: "POST",
-        url: "", 
+        url: "/booking/view",
         data: $(form).serialize(),
 
         // Ошибка отправки запроса
@@ -201,12 +276,14 @@ $(document).ready(function () {
         },
 
         success: function (response) {
-          if (response["status"] == "OK") {
-            
-          }else{
-            // Ошибка с сервера
-            modal(response["error"]["message"]);
-          }
+          $('.-js-schedule-booking').html(response);
+          // Таблица с комнатоми
+          $('.rooms__home').on('click', (e) => {
+            if (e.target.className == 'rooms__more-btn' || e.target.className == 'rooms__more-btn rooms__more-btn--active') {
+              e.target.classList.toggle('rooms__more-btn--active');
+              e.delegateTarget.children['1'].classList.toggle('rooms__more--active');
+            }
+          })
         }
 
       });

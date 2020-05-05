@@ -2,6 +2,11 @@
 
 namespace app\controllers;
 
+use app\models\Customer;
+use app\models\Housing;
+use app\models\HousingScheme;
+use app\models\Order;
+use app\models\Service;
 use app\models\SignupForm;
 use app\models\User;
 use Yii;
@@ -9,7 +14,6 @@ use yii\filters\AccessControl;
 use yii\helpers\VarDumper;
 use yii\web\Controller;
 use yii\web\Response;
-use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 
@@ -144,6 +148,31 @@ class SiteController extends Controller
 	
 	public function actionCabinet()
 	{
-		return $this->render('cabinet');
+		$housings = Housing::find()->all();
+		$customers = Customer::find()->all();
+		$housingScheme = HousingScheme::find()->all();
+		$services = Service::find()->all();
+		
+		$scheduleBooking = [];
+		/** @var HousingScheme $hs */
+		foreach ($housingScheme as $hs) {
+			$scheduleBooking[$hs->housing_id][$hs->room] = [
+				'capacity_room' => (int) $hs->room_type,
+				'reserved_seats' => 0
+			];
+		}
+		/** @var Order[] $orders */
+		$orders = Order::find()->all();
+		
+		foreach ($orders as $order) {
+			$scheduleBooking[$order->housing_id][$order->room]['reserved_seats']++;
+		}
+		
+		return $this->render('cabinet', [
+			'housings' => $housings,
+			'customers' => $customers,
+			'scheduleBooking' => $scheduleBooking,
+			'services' => $services
+		]);
 	}
 }
