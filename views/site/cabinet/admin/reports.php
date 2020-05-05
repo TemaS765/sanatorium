@@ -8,7 +8,7 @@ $customersLastYear = array_reduce(
         $customers,
         function ($count, $customer) use ($lastYear) {
             /** @var \app\models\Customer $customer */
-	        if (date('Y', time($customer->created_date)) == $lastYear) {
+	        if (date('Y', strtotime('-1 year', time($customer->created_date))) == $lastYear) {
                 $count++;
             }
             return $count;
