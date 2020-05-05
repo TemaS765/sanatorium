@@ -245,4 +245,47 @@ $(document).ready(function () {
       });
     }
   });
+
+  // Форма врача терапевта
+  // Активация радиобаттонов
+  let radioActive = 0;
+  $('.doc-edit__diet-input').on('click', (e) => {
+    let i = 0;
+    while(i < $('.doc-edit__diet-input').length){
+      if ($('.doc-edit__diet-input')[i].checked) {
+        radioActive = i + 1;
+        $('.label-radio')[i].classList.add('checked');
+      }else{
+        $('.label-radio')[i].classList.remove('checked');
+      }
+      i++;
+    }  
+  })
+  // Валидация и отправка
+  $('.doc-edit').validate({
+    submitHandler: function(form) {
+      $.ajax({
+        type: "POST",
+        url: "", 
+        data: 'diet=' + radioActive + '&' + 
+        $('.doc-edit').serialize().replace('dietInput=on&',''),
+
+        // Ошибка отправки запроса
+        error: () => {
+          modal("Ошибка запроса, попробуйте перезагрузить страницу");
+        },
+
+        success: function (response) {
+          if (response["status"] == "OK") {
+            $('.customers__table-more').removeClass('customers__table-more--active');
+          }else{
+            // Ошибка с сервера
+            modal(response["error"]["message"]);
+          }
+        }
+
+      });
+    }
+  });
+
 });

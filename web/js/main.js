@@ -112,10 +112,24 @@ $(document).ready(function () {
     }
   })
 
+  // Таблица врача-терапевта
+  $('.customers__table-item').on('click', (e) => {
+    if (e.target.className == 'customers__more-doc-edit') {
+      e.delegateTarget.children['1'].classList.toggle('customers__table-more--active'); 
+    }
+  })
+
   // Автоматический вывод цены услуги
   $("#service").change(function(){
     $('.services__cost')[0].innerHTML = $(this).children("option:selected")["0"].value + " руб.";
   });
+  
+  // Активация чекбоксов
+  $('.label-checkbox').on('click', (e) => {
+    e.target.classList.toggle('checked');
+  })
+  
+
   
   
 });

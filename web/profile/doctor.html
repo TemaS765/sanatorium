@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Саулык | Врач-терапевт</title>
+  <link rel="shortcut icon" href="../assets/img/logo.svg" type="image/png">
+
+  <!-- Шрифт Rubik -->
+  <!-- font-family: 'Rubik', sans-serif; -->
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <!-- animate.css -->
+  <!-- Библиотека с анимациями -->
+  <link rel="stylesheet" href="../assets/css/animate.css">
+
+  <!-- style.css -->
+  <!-- Основной CSS файл-->
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+
+<body>
+  <header class="header">
+    <div class="container header__container">
+      <h1 class="header__name">Врач-терапевт</h1>
+      
+      <a href="../vendor/logout.php" class="logout">Выход</a>
+    </div>
+    <!-- /.container -->
+  </header>
+
+  <main class="main">
+    <section class="customers section section--active" id="section-1">
+      <div class="container">
+        <div class="customers__title">Клиенты</div>
+        <div class="customers__table">
+          <div class="customers__table-title">
+            <div class="customers__name-title">ФИО</div>
+            <div class="customers__references">Наличие справок</div>
+            <div class="customers__diet">Диета</div>
+            <div class="customers__treatment-title">Лечение</div>
+          </div>
+            
+          <!-- Запись пользователя -->
+          <div class="customers__table-item">
+            <div class="customers__table-line">
+
+              <!-- ФИО -->
+              <div class="customers__name"><!-- Значение из БЗ --></div>
+
+              <!-- Наличие справок -->
+              <div class="customers__references">
+                <!-- 
+                  <img src="../assets/img/check.svg" alt="" style="width: 3rem;">   // если есть
+                  <img src="../assets/img/uncheck.svg" alt="" style="width: 3rem;"> // если нет
+                -->
+              </div>
+
+              <!-- Диета -->
+              <div class="customers__diet"><!-- Значение из БЗ --></div>
+
+              <!-- Размещён ли уже клиент, это отмечает вожатый -->
+              <div class="customers__treatment">
+                <div class="customers__treatment-list">
+                  <span>лечение1</span>
+                  <span>лечение2</span>
+                  <span>лечение3</span>
+                  <span>лечение4</span>
+                  <span>лечение5</span>
+                </div>
+                <!-- /.customers__treatment-list -->
+              </div>
+              <div class="customers__more">
+                <div class="customers__more-doc-edit">Изменить</div>
+              </div>
+            </div>
+            <!-- /.customers__table-line -->
+
+            <div class="customers__table-more">
+              <form action="" method="POST" class="doc-edit">
+                <div class="doc-edit__diet">
+                  <span>
+                    <div class="doc-edit__list-title">Диета:</div>
+                    <div class="input-group">
+                      <input type="radio" name="dietInput" id="diet-input-1" class="doc-edit__diet-input">
+                      <label value="1" class="label-radio" for="diet-input-1">1</label>
+                    </div>
+                    <!-- /.input-group -->
+                    <div class="input-group">
+                      <input type="radio" name="dietInput" id="diet-input-2" class="doc-edit__diet-input">
+                      <label value="2" class="label-radio" for="diet-input-2">2</label>
+                    </div>
+                    <!-- /.input-group -->
+                    <div class="input-group">
+                      <input type="radio" name="dietInput" id="diet-input-3" class="doc-edit__diet-input">
+                      <label value="3" class="label-radio" for="diet-input-3">3</label>
+                    </div>
+                    <!-- /.input-group -->
+                    <div class="input-group">
+                      <input type="radio" name="dietInput" id="diet-input-4" class="doc-edit__diet-input">
+                      <label value="4" class="label-radio" for="diet-input-4">4</label>
+                    </div>
+                    <!-- /.input-group -->
+                    <div class="input-group">
+                      <input type="radio" name="dietInput" id="diet-input-5" class="doc-edit__diet-input">
+                      <label value="5" class="label-radio" for="diet-input-5">5</label>
+                    </div>
+                    <!-- /.input-group -->
+                    <div class="input-group">
+                      <input type="radio" name="dietInput" id="diet-input-6" class="doc-edit__diet-input">
+                      <label value="6" class="label-radio" for="diet-input-6">6</label>
+                    </div>
+                    <!-- /.input-group -->
+                    <div class="input-group">
+                      <input type="radio" name="dietInput" id="diet-input-7" class="doc-edit__diet-input">
+                      <label value="7" class="label-radio" for="diet-input-7">7</label>
+                    </div>
+                    <!-- /.input-group -->
+                  </span>
+                  <span>
+                    <div class="input-group">
+                      <input type="radio" name="dietInput" id="diet-input-8" class="doc-edit__diet-input">
+                      <label value="8" class="label-radio" for="diet-input-8">8</label>
+                    </div>
+                    <!-- /.input-group -->
+                    <div class="input-group">
+                      <input type="radio" name="dietInput" id="diet-input-9" class="doc-edit__diet-input">
+                      <label value="9" class="label-radio" for="diet-input-9">9</label>
+                    </div>
+                    <!-- /.input-group -->
+                    <div class="input-group">
+                      <input type="radio" name="dietInput" id="diet-input-10" class="doc-edit__diet-input">
+                      <label value="10" class="label-radio" for="diet-input-10">10</label>
+                    </div>
+                    <!-- /.input-group -->
+                    <div class="input-group">
+                      <input type="radio" name="dietInput" id="diet-input-11" class="doc-edit__diet-input">
+                      <label value="11" class="label-radio" for="diet-input-11">11</label>
+                    </div>
+                    <!-- /.input-group -->
+                    <div class="input-group">
+                      <input type="radio" name="dietInput" id="diet-input-12" class="doc-edit__diet-input">
+                      <label value="12" class="label-radio" for="diet-input-12">12</label>
+                    </div>
+                    <!-- /.input-group -->
+                    <div class="input-group">
+                      <input type="radio" name="dietInput" id="diet-input-13" class="doc-edit__diet-input">
+                      <label value="13" class="label-radio" for="diet-input-13">13</label>
+                    </div>
+                    <!-- /.input-group -->
+                    <div class="input-group">
+                      <input type="radio" name="dietInput" id="diet-input-14" class="doc-edit__diet-input">
+                      <label value="14" class="label-radio" for="diet-input-14">14</label>
+                    </div>
+                    <!-- /.input-group -->
+                    <div class="input-group">
+                      <input type="radio" name="dietInput" id="diet-input-15" class="doc-edit__diet-input">
+                      <label value="15" class="label-radio" for="diet-input-15">15</label>
+                    </div>
+                    <!-- /.input-group -->
+                  </span>
+                </div>
+                <!-- /.doc-edit__diet -->
+                <div class="doc-edit__treatment">
+                  <span>
+                    <div class="doc-edit__list-title">Лечение:</div>
+                    <div class="input-group">
+                      <input type="checkbox" name="treatmentInput1" id="treatment-input-1" class="doc-edit__treatment-input">
+                      <label class="label-checkbox" for="treatment-input-1">Кислородный коктель</label>
+                    </div>
+                    <!-- /.input-group -->
+                    <div class="input-group">
+                      <input type="checkbox" name="treatmentInput2" id="treatment-input-2" class="doc-edit__treatment-input">
+                      <label class="label-checkbox" for="treatment-input-2">Желудочно-кешечный сбор</label>
+                    </div>
+                    <!-- /.input-group -->
+                    <div class="input-group">
+                      <input type="checkbox" name="treatmentInput3" id="treatment-input-3" class="doc-edit__treatment-input">
+                      <label class="label-checkbox" for="treatment-input-3">Желчегонный сбор</label>
+                    </div>
+                    <!-- /.input-group -->
+                    <div class="input-group">
+                      <input type="checkbox" name="treatmentInput4" id="treatment-input-4" class="doc-edit__treatment-input">
+                      <label class="label-checkbox" for="treatment-input-4">Витаминный сбор</label>
+                    </div>
+                    <!-- /.input-group -->
+                    <div class="input-group">
+                      <input type="checkbox" name="treatmentInput5" id="treatment-input-5" class="doc-edit__treatment-input">
+                      <label class="label-checkbox" for="treatment-input-5">Лечебная физкультура</label>
+                    </div>
+                    <!-- /.input-group -->
+                    <div class="input-group">
+                      <input type="checkbox" name="treatmentInput6" id="treatment-input-6" class="doc-edit__treatment-input">
+                      <label class="label-checkbox" for="treatment-input-6">Жемчужная ванна</label>
+                    </div>
+                    <!-- /.input-group -->
+                    <div class="input-group">
+                      <input type="checkbox" name="treatmentInput7" id="treatment-input-7" class="doc-edit__treatment-input">
+                      <label class="label-checkbox" for="treatment-input-7">Морская ванна</label>
+                    </div>
+                    <!-- /.input-group -->
+                  </span>
+                  <span>
+                    <div class="input-group">
+                      <input type="checkbox" name="treatmentInput8" id="treatment-input-8" class="doc-edit__treatment-input">
+                      <label class="label-checkbox" for="treatment-input-8">Хвойная ванна</label>
+                    </div>
+                    <!-- /.input-group -->
+                    <div class="input-group">
+                      <input type="checkbox" name="treatmentInput9" id="treatment-input-9" class="doc-edit__treatment-input">
+                      <label class="label-checkbox" for="treatment-input-9">Скипидарная ванна</label>
+                    </div>
+                    <!-- /.input-group -->
+                    <div class="input-group">
+                      <input type="checkbox" name="treatmentInput10" id="treatment-input-10" class="doc-edit__treatment-input">
+                      <label class="label-checkbox" for="treatment-input-10">Гальваногрязь</label>
+                    </div>
+                    <!-- /.input-group -->
+                    <div class="input-group">
+                      <input type="checkbox" name="treatmentInput11" id="treatment-input-11" class="doc-edit__treatment-input">
+                      <label class="label-checkbox" for="treatment-input-11">Массаж ручной</label>
+                    </div>
+                    <!-- /.input-group -->
+                    <div class="input-group">
+                      <input type="checkbox" name="treatmentInput12" id="treatment-input-12" class="doc-edit__treatment-input">
+                      <label class="label-checkbox" for="treatment-input-12">Массаж точечный</label>
+                    </div>
+                    <!-- /.input-group -->
+                    <div class="input-group">
+                      <input type="checkbox" name="treatmentInput13" id="treatment-input-13" class="doc-edit__treatment-input">
+                      <label class="label-checkbox" for="treatment-input-13">Массаж механический</label>
+                    </div>
+                    <!-- /.input-group -->
+                    <div class="input-group">
+                      <input type="checkbox" name="treatmentInput14" id="treatment-input-14" class="doc-edit__treatment-input">
+                      <label class="label-checkbox" for="treatment-input-14">Микроклизмы</label>
+                    </div>
+                    <!-- /.input-group -->
+                    <div class="input-group">
+                      <input type="checkbox" name="treatmentInput15" id="treatment-input-15" class="doc-edit__treatment-input">
+                      <label class="label-checkbox" for="treatment-input-15">Электросон</label>
+                    </div>
+                    <!-- /.input-group -->
+                  </span>
+                  <span>
+                    <div class="input-group">
+                      <input type="checkbox" name="treatmentInput16" id="treatment-input-16" class="doc-edit__treatment-input">
+                      <label class="label-checkbox" for="treatment-input-16">УВИ</label>
+                    </div>
+                    <!-- /.input-group -->
+                    <div class="input-group">
+                      <input type="checkbox" name="treatmentInput17" id="treatment-input-17" class="doc-edit__treatment-input">
+                      <label class="label-checkbox" for="treatment-input-17">Электрофорез</label>
+                    </div>
+                    <!-- /.input-group -->
+                    <div class="input-group">
+                      <input type="checkbox" name="treatmentInput18" id="treatment-input-18" class="doc-edit__treatment-input">
+                      <label class="label-checkbox" for="treatment-input-18">Галокамера</label>
+                    </div>
+                    <!-- /.input-group -->
+                    <div class="input-group">
+                      <input type="checkbox" name="treatmentInput19" id="treatment-input-19" class="doc-edit__treatment-input">
+                      <label class="label-checkbox" for="treatment-input-19">Ингаляция</label>
+                    </div>
+                    <!-- /.input-group -->
+                    <div class="input-group">
+                      <input type="checkbox" name="treatmentInput20" id="treatment-input-20" class="doc-edit__treatment-input">
+                      <label class="label-checkbox" for="treatment-input-20">Аромотерапия</label>
+                    </div>
+                    <!-- /.input-group -->
+                  </span>
+                </div>
+                <!-- /.doc-edit__treatment -->
+                <div class="doc-edit__button-box">
+                  <button class="">Подтвердить</button>
+                </div>
+              </form>
+              <!-- /.doc-edit -->
+
+              <!-- /.customers__button-box -->
+            </div>
+            <!-- /.customers__table-more -->
+          </div>
+          <!-- /.customers__table-item -->
+        </div>
+        <!-- /.customers__table -->
+        
+      </div>
+      <!-- /.container -->
+    </section>
+    <!-- customers -->
+  </main>
+
+  <div class="modal">
+    <div class="modal__window">
+      <div class="modal__message"></div>
+    </div>
+  </div>
+  <!-- /.modal -->
+
+  <!-- jQuery -->
+  <script src="../assets/js/jquery-3.4.1.min.js"></script>
+  <!-- WOW -->
+  <script src="../assets/js/wow.min.js"></script>
+  <!-- jquery.validate -->
+  <script src="../assets/js/jquery.validate.min.js"></script>
+  <!-- jquery.mask -->
+  <script src="../assets/js/jquery.mask.min.js"></script>
+  <!-- valid.js -->
+  <!-- Здесь прописанны валидации форм, а также поведение модального окна с сообщением после отправки формы -->
+  <script src="../assets/js/valid.js"></script>
+  <!-- main.js -->
+  <script src="../assets/js/main.js"></script>
+</body>
+
+</html>
