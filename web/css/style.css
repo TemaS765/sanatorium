@@ -309,7 +309,7 @@ template {
 
 label.invalid {
   position: absolute;
-  /*bottom: -1.15rem;*/
+  bottom: -1.15rem;
   left: 0;
   display: block;
   width: 100%;
@@ -752,7 +752,7 @@ a {
         bottom: -0.5rem;
         left: 1rem; }
       .reservation__input-group > .input-group > label.invalid {
-        /*bottom: -1.15rem;*/
+        bottom: -1.15rem;
         left: 1rem; }
   .reservation__button {
     display: block;
@@ -880,6 +880,99 @@ a {
   .statistics__value {
     margin-left: 2rem;
     color: #6F8755; }
+
+.accommodation-form {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 265px; }
+  .accommodation-form__checkbox {
+    display: block;
+    height: 35px;
+    width: 30px;
+    cursor: pointer;
+    border: none; }
+  .accommodation-form__submit {
+    opacity: 0;
+    visibility: hidden;
+    display: block;
+    margin-right: 1rem;
+    padding: 0.5rem;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #717A99;
+    border: none;
+    background: #E18962;
+    border-radius: 5px;
+    cursor: pointer; }
+    .accommodation-form__submit--active {
+      opacity: 1;
+      visibility: visible; }
+
+.customers__more-doc-edit {
+  background-color: #E18962;
+  width: 100px;
+  height: 30px;
+  margin: auto;
+  color: #717A99;
+  line-height: 30px;
+  border-radius: 5px;
+  cursor: pointer; }
+
+.customers__treatment-list {
+  display: flex;
+  align-items: center;
+  flex-direction: column; }
+  .customers__treatment-list > span {
+    margin-bottom: 0.5rem; }
+
+.doc-edit {
+  display: flex;
+  justify-content: space-between; }
+  .doc-edit__list-title {
+    color: #E18962;
+    font-weight: 700;
+    font-size: 1.3rem;
+    display: block;
+    margin: 0 0 0.5rem; }
+  .doc-edit__diet, .doc-edit__treatment {
+    display: flex; }
+    .doc-edit__diet > .input-group > label, .doc-edit__diet > span > .input-group > label, .doc-edit__treatment > .input-group > label, .doc-edit__treatment > span > .input-group > label {
+      display: inline-block;
+      color: #E18962;
+      margin: 0.5rem  0;
+      cursor: pointer; }
+    .doc-edit__diet > span, .doc-edit__treatment > span {
+      min-width: 64px;
+      margin: 0 1rem; }
+  .doc-edit__treatment > span > .input-group > input, .doc-edit__diet > span > .input-group > input {
+    opacity: 0;
+    visibility: hidden; }
+  .doc-edit__treatment > span > .input-group > label:before, .doc-edit__diet > span > .input-group > label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    display: block;
+    height: 12px;
+    width: 12px;
+    border: 1px solid #E18962;
+    border-radius: 3px; }
+  .doc-edit__diet > span > .input-group > label:before {
+    border-radius: 50%; }
+  .doc-edit__button-box {
+    display: flex;
+    align-items: flex-end;
+    min-height: 100%; }
+    .doc-edit__button-box > button {
+      background-color: #E18962;
+      color: #717A99;
+      cursor: pointer;
+      border: none;
+      padding: 0.5rem;
+      border-radius: 5px; }
+
+.checked:before {
+  background-color: #E18962; }
 
 @media screen and (max-width: 1200px) {
   html {

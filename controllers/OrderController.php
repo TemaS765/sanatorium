@@ -41,4 +41,29 @@ class OrderController extends Controller
 		
 		return $data;
 	}
+	
+	public function actionChangeStatus()
+	{
+		Yii::$app->response->format = Response::FORMAT_JSON;
+		$data = [
+			'status' => 'OK',
+			'errors' => []
+		];
+		$model = new OrderForm();
+		$model->setScenario('change_status');
+		
+		if($model->load(\Yii::$app->request->post()) && $model->validate()) {
+			if (!$model->save()) {
+				throw new HttpException(400, "Не удалось создать заказ");
+			}
+		}
+		
+		if ($model->hasErrors()) {
+			foreach ($model->getErrors() as $field => $messages) {
+				throw new HttpException(400, $messages);
+			}
+		}
+		
+		return $data;
+	}
 }

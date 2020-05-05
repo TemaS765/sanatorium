@@ -290,5 +290,41 @@ $(document).ready(function () {
     }
   });
 
+  // Форма на странице вожатого
+
+  $('.accommodation-form').on('click', (e) => {
+    if (e.target.className == 'accommodation-form__checkbox') {
+      e.delegateTarget['1'].classList.toggle('accommodation-form__submit--active');
+    }
+  })
+
+  $('.accommodation-form').validate({
+    submitHandler: function(form) {
+      $.ajax({
+        type: "POST",
+        url: "/order/change-status",
+        data: serializeForm(form),
+
+        // Ошибка отправки запроса
+        error: (response) => {
+          if (response.responseJSON !== undefined && response.responseJSON.status === 400) {
+            modal(response.responseJSON.message);
+          } else {
+            modal("Ошибка запроса, попробуйте перезагрузить страницу");
+          }
+        },
+
+        success: function (response) {
+          if (response["status"] == "OK") {
+
+          }else{
+            // Ошибка с сервера
+            modal(response["error"]["message"]);
+          }
+        }
+
+      });
+    }
+  });
 
 });

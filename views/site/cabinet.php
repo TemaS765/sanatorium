@@ -8,12 +8,11 @@
  * @var $services \app\models\Service[]
  */
 
-use yii\helpers\Html;
-
 $this->title = Yii::$app->name.' | '.Yii::$app->user->identity->username;
+$role = Yii::$app->user->identity->role;
 ?>
 <?= $this->render(
-        'cabinet/admin',
+        'cabinet/'.$role,
         [
                 'housings' => $housings,
                 'customers' => $customers,
