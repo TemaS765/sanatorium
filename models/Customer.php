@@ -24,6 +24,12 @@ use yii\web\HttpException;
  */
 class Customer extends ActiveRecord
 {
+	/**
+	 * Медицинская карта
+	 * @var MedicalCard
+	 */
+	public $medical_card;
+	
 	public static function tableName()
 	{
 		return 'customer';
@@ -59,6 +65,15 @@ class Customer extends ActiveRecord
 		return $this->hasMany(OrderService::class, ['customer_id' => 'id']);
 	}
 	
+	/**
+	 * Получить медицинскую карту
+	 * @return MedicalCard
+	 */
+	public function getMedicalCard()
+	{
+		return $this->medical_card ? $this->medical_card : MedicalCard::findOne(['customer_id' => $this->id]);
+	}
+	
 	public function delete()
 	{
 		if ($this->order->delete() === false) {
@@ -71,6 +86,23 @@ class Customer extends ActiveRecord
 			}
 		}
 		
+		if ($this->getMedicalCard()->delete() === false) {
+			throw new HttpException(400, "Не удалось удалить медицинскую карту клиента");
+		}
+		
 		return parent::delete();
+	}
+	
+	public function save($runValidation = true, $attributeNames = null)
+	{
+		parent::save($runValidation, $attributeNames);
+		
+		$medicalCard = new MedicalCard();
+		$medicalCard->customer_id = $this->id;
+		$medicalCard->treatment_ids = '';
+		$medicalCard->diet_id = 0;
+		$medicalCard->save();
+		
+		return true;
 	}
 }

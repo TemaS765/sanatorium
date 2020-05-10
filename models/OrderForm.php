@@ -184,8 +184,8 @@ class OrderForm extends Model
     {
 	    /** @var Order[] $orders */
 	    $orders = Order::find()->where(
-		    '(departure_date >= :date_to and arrival_date < :date_to) OR '.
-		    '(arrival_date >= :date_from and arrival_date <= :date_to) '.
+		    '((departure_date >= :date_to and arrival_date < :date_to) OR '.
+		    '(arrival_date >= :date_from and arrival_date <= :date_to)) '.
 		    'AND housing_id = :housing_id AND room = :room',
 		    [
 			    ':date_from' => $this->arrival_date,

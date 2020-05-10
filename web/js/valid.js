@@ -296,7 +296,7 @@ $(document).ready(function () {
     if (e.target.className == 'accommodation-form__checkbox') {
       e.delegateTarget['1'].classList.toggle('accommodation-form__submit--active');
     }
-  })
+  });
 
   $('.accommodation-form').validate({
     submitHandler: function(form) {
@@ -327,4 +327,31 @@ $(document).ready(function () {
     }
   });
 
+  // Валидация и отправка
+  $('.doc-edit').each(function () {
+    $(this).validate({
+      submitHandler: function(form) {
+        $.ajax({
+          type: "POST",
+          url: "/medical-card/save",
+          data: $(form).serialize(),
+
+          // Ошибка отправки запроса
+          error: () => {
+            modal("Ошибка запроса, попробуйте перезагрузить страницу");
+          },
+
+          success: function (response) {
+            if (response["status"] == "OK") {
+              $('.customers__table-more').removeClass('customers__table-more--active');
+            }else{
+              // Ошибка с сервера
+              modal(response["error"]["message"]);
+            }
+          }
+
+        });
+      }
+    });
+  });
 });

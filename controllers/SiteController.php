@@ -3,11 +3,14 @@
 namespace app\controllers;
 
 use app\models\Customer;
+use app\models\Diet;
 use app\models\Housing;
 use app\models\HousingScheme;
+use app\models\MedicalCard;
 use app\models\Order;
 use app\models\Service;
 use app\models\SignupForm;
+use app\models\Treatment;
 use app\models\User;
 use Yii;
 use yii\filters\AccessControl;
@@ -152,7 +155,9 @@ class SiteController extends Controller
 		$customers = Customer::find()->all();
 		$housingScheme = HousingScheme::find()->all();
 		$services = Service::find()->all();
-		
+		$medicalCards = MedicalCard::find()->all();
+		$diets = Diet::find()->all();
+		$treatments = Treatment::find()->all();
 		$scheduleBooking = [];
 		/** @var HousingScheme $hs */
 		foreach ($housingScheme as $hs) {
@@ -172,7 +177,10 @@ class SiteController extends Controller
 			'housings' => $housings,
 			'customers' => $customers,
 			'scheduleBooking' => $scheduleBooking,
-			'services' => $services
+			'services' => $services,
+			'medicalCards' => $medicalCards,
+			'diets' => $diets,
+			'treatments' => $treatments
 		]);
 	}
 }

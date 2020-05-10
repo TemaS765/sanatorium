@@ -104,4 +104,11 @@ $(document).ready(function () {
       e.delegateTarget.children['7'].classList.toggle('services--active'); 
     }
   })
+
+  // Таблица врача-терапевта
+  $('.customers__table-item').on('click', (e) => {
+    if (e.target.className == 'customers__more-doc-edit') {
+      e.delegateTarget.children['1'].classList.toggle('customers__table-more--active');
+    }
+  });
 });

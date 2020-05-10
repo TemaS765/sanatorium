@@ -6,6 +6,9 @@
  * @var $customers \app\models\Customer[]
  * @var $scheduleBooking array
  * @var $services \app\models\Service[]
+ * @var $medicalCards \app\models\MedicalCard[]
+ * @var $treatments \app\models\Treatment[]
+ * @var $diets \app\models\Diet[]
  */
 
 $this->title = Yii::$app->name.' | '.Yii::$app->user->identity->username;
@@ -17,7 +20,10 @@ $role = Yii::$app->user->identity->role;
                 'housings' => $housings,
                 'customers' => $customers,
                 'scheduleBooking' => $scheduleBooking,
-                'services' => $services
+                'services' => $services,
+                'medicalCards' => $medicalCards,
+	            'diets' => $diets,
+	            'treatments' => $treatments
         ]
 ) ?>
 <div class="modal">
