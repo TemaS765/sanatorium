@@ -43,7 +43,7 @@ class MedicalCard extends ActiveRecord
 	
 	/**
 	 * Получаем лечения
-	 * @return \yii\db\ActiveQuery
+	 * @return Treatment[]
 	 */
 	public function getTreatments()
 	{

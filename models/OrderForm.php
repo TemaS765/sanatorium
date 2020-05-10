@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\helpers\DateHelper;
 use yii\base\Model;
 use yii\helpers\VarDumper;
 use yii\web\HttpException;
@@ -161,6 +162,27 @@ class OrderForm extends Model
 			    throw new HttpException(400, "Не удалось создать клиента");
 		    }
 		
+		    $medicalCard = new MedicalCard();
+		    $medicalCard->customer_id = $customer->id;
+		    $medicalCard->treatment_ids = '';
+		    $medicalCard->diet_id = 0;
+		
+		    if (!$medicalCard->save()) {
+			    throw new HttpException(400, "Не удалось создать медицинскую карту");
+		    }
+		    
+		    $dateRange = DateHelper::getDateDaysByRange($this->arrival_date, $this->departure_date);
+		    
+		    foreach ($dateRange as $date) {
+			    $treatmentSchedule = new TreatmentSchedule();
+			    $treatmentSchedule->customer_id = $customer->id;
+			    $treatmentSchedule->treatment_ids = '';
+			    $treatmentSchedule->date = $date;
+			    if (!$treatmentSchedule->save()) {
+				    throw new HttpException(400, "Не удалось создать график лечения");
+			    }
+		    }
+		    
 		    $order->customer_id = $customer->id;
 		    $order->housing_id = $housing->id;
 		    $order->floor = $housingSchema->floor;

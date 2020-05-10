@@ -321,7 +321,7 @@ input.invalid, select.invalid {
   border-bottom: 2px solid #cf2929; }
 
 .modal {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   display: none;
@@ -525,7 +525,7 @@ a {
     font-weight: 700;
     color: #E18962; }
   .customers__table {
-    width: 80%;
+    width: 100%;
     margin: 0 auto;
     background-color: #F4D9CB;
     border: 4px solid #E18962;

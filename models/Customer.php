@@ -30,6 +30,12 @@ class Customer extends ActiveRecord
 	 */
 	public $medical_card;
 	
+	/**
+	 * График лечения
+	 * @var TreatmentSchedule[]
+	 */
+	public $treatment_schedules = [];
+	
 	public static function tableName()
 	{
 		return 'customer';
@@ -74,6 +80,19 @@ class Customer extends ActiveRecord
 		return $this->medical_card ? $this->medical_card : MedicalCard::findOne(['customer_id' => $this->id]);
 	}
 	
+	/**
+	 * График лечения
+	 * @return TreatmentSchedule[]
+	 */
+	public function getTreatmentSchedules()
+	{
+		if (empty($this->treatment_schedules)) {
+			$this->treatment_schedules = TreatmentSchedule::findAll(['customer_id' => $this->id]);
+		}
+		
+		return $this->treatment_schedules;
+	}
+	
 	public function delete()
 	{
 		if ($this->order->delete() === false) {
@@ -90,18 +109,18 @@ class Customer extends ActiveRecord
 			throw new HttpException(400, "Не удалось удалить медицинскую карту клиента");
 		}
 		
+		foreach ($this->getTreatmentSchedules() as $treatment_schedule) {
+			if ($treatment_schedule->delete() === false) {
+				throw new HttpException(400, "Не удалось удалить график лечения");
+			}
+		}
+		
 		return parent::delete();
 	}
 	
 	public function save($runValidation = true, $attributeNames = null)
 	{
 		parent::save($runValidation, $attributeNames);
-		
-		$medicalCard = new MedicalCard();
-		$medicalCard->customer_id = $this->id;
-		$medicalCard->treatment_ids = '';
-		$medicalCard->diet_id = 0;
-		$medicalCard->save();
 		
 		return true;
 	}

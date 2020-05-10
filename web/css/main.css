@@ -175,3 +175,61 @@
 
 .checked:before, .input-group>input:checked+label:before {
   background-color: #E18962; }
+.input-group--off {
+  opacity: 0.5; }
+.input-group--off:before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: block; }
+.schedule__day {
+  display: flex;
+  justify-content: space-between;
+  min-width: 100%;
+  margin-bottom: 0.5rem; }
+
+.schedule__date {
+  margin-top: 0.2rem; }
+
+.schedule__treatment-list > span {
+  display: block;
+  margin-bottom: 0.3rem; }
+
+.med-edit__line {
+  display: flex;
+  margin-bottom: 0.5rem;
+  padding: 0 1rem;
+  font-size: 1.2rem;
+  color: #E18962; }
+
+.med-edit__date {
+  display: block;
+  margin-top: 0.5rem;
+  margin-right: 3rem;
+  font-weight: 700; }
+
+.med-edit__treatment-list {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 1rem;
+  border: 3px solid #E18962;
+  border-radius: 5px; }
+.med-edit__treatment-list > .input-group {
+  width: 250px; }
+
+.med-edit__submit {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-left: 1rem; }
+.med-edit__submit button {
+  width: 150px;
+  height: 30px;
+  border: none;
+  font-size: 1.3rem;
+  line-height: 30px;
+  border-radius: 5px;
+  color: #717A99;
+  background-color: #E18962;
+  cursor: pointer; }

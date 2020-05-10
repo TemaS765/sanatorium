@@ -354,4 +354,75 @@ $(document).ready(function () {
       }
     });
   });
+
+  // Форма медицинского работника
+  // Отключение несовместимых лечений
+  $('.doc-edit__treatment-input').on('click', (e) => {
+    function exception(str1,str2){
+      if (e.currentTarget.offsetParent.children[1].innerText == str1){
+        let i = 0
+        while (i < e.currentTarget.offsetParent.parentElement.children.length) {
+          if (e.currentTarget.offsetParent.parentElement.children[i].innerText == ' ' + str2) {
+            e.currentTarget.offsetParent.parentElement.children[i].classList.toggle('input-group--off')
+          }
+          i++;
+        }
+      }
+      if (e.currentTarget.offsetParent.children[1].innerText == str2){
+        let i = 0
+        while (i < e.currentTarget.offsetParent.parentElement.children.length) {
+          if (e.currentTarget.offsetParent.parentElement.children[i].innerText == ' ' + str1) {
+            e.currentTarget.offsetParent.parentElement.children[i].classList.toggle('input-group--off')
+          }
+          i++;
+        }
+      }
+    }
+    exception('Электросон','Электрофорез');
+    exception('Аромотерапия','Галокамера');
+    exception('Морская ванна','Электросон');
+    exception('Массаж механический','Скипидарная ванна');
+
+  });
+
+  let form, data = '';
+
+  $('.med-edit').on('click', (e) => {
+    if (e.target.innerText  == "Подтвердить"){
+      form = e.target.form
+
+      let i = 0
+      while (i < e.delegateTarget.children.length - 1){
+        let j = 0
+        while (j < e.delegateTarget.children[i].children[1].children.length) {
+          if (e.delegateTarget.children[i].children[1].children[j].children[0].checked) {
+            data += 'sch[' + i + ']' + '[' + i + ']' + encodeURI(e.delegateTarget.children[i].children[1].children[j].children[1].innerText) + '&';
+          }
+          j++;
+        }
+        i++;
+      }
+
+      $.ajax({
+        type: "POST",
+        url: "/treatment-schedule/save",
+        data: $(form).serialize(),
+
+        // Ошибка отправки запроса
+        error: () => {
+          modal("Ошибка запроса, попробуйте перезагрузить страницу");
+        },
+
+        success: function (response) {
+          if (response["status"] == "OK") {
+
+          }else{
+            // Ошибка с сервера
+            modal(response["error"]["message"]);
+          }
+        }
+
+      });
+    }
+  })
 });

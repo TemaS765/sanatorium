@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\helpers\DateHelper;
 use app\models\Customer;
 use app\models\Diet;
 use app\models\Housing;
@@ -11,6 +12,7 @@ use app\models\Order;
 use app\models\Service;
 use app\models\SignupForm;
 use app\models\Treatment;
+use app\models\TreatmentSchedule;
 use app\models\User;
 use Yii;
 use yii\filters\AccessControl;
