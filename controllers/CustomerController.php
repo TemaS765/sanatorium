@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 use app\models\Customer;
+use Mpdf\Mpdf;
 use yii\db\Exception;
 use yii\web\Controller;
 use yii\web\HttpException;

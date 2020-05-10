@@ -384,7 +384,10 @@ a {
 .section {
   display: none;
   background: url(../img/bg.png) no-repeat left top, url(../img/bg-b.png) no-repeat right bottom;
-  padding-bottom: 5rem; }
+  padding-bottom: 5rem;
+  margin-top: -3.643rem;
+  padding-top: 3.643rem;
+  min-height: 99vh; }
   .section--active {
     display: block; }
 

@@ -113,6 +113,17 @@ use yii\helpers\Html;
                                           <!-- /.input-group -->
                                       <?php endforeach; ?>
                                   </span>
+	                              <span>
+		                              <div class="input-group input-group--references">
+                                            <input type="checkbox" name="has_certificate_health" id="references"
+                                                   class="doc-edit__treatment-input"
+                                                   <?php if ($medicalCard->has_certificate_health == 'YES') : ?>
+	                                                   checked
+                                                   <?php endif; ?>
+                                            >
+                                            <label class="label-checkbox" for="references">Наличие справок</label>
+                                     </div>
+	                              </span>
                                 </div>
                                 <!-- /.doc-edit__treatment -->
                                 <div class="doc-edit__button-box">

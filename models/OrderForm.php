@@ -165,7 +165,7 @@ class OrderForm extends Model
 		    $medicalCard = new MedicalCard();
 		    $medicalCard->customer_id = $customer->id;
 		    $medicalCard->treatment_ids = '';
-		    $medicalCard->diet_id = 0;
+		    $medicalCard->diet_id = 15;
 		
 		    if (!$medicalCard->save()) {
 			    throw new HttpException(400, "Не удалось создать медицинскую карту");

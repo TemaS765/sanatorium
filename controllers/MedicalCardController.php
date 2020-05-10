@@ -39,6 +39,12 @@ class MedicalCardController extends Controller
 		$model = new MedicalCardForm();
 		$model->setAttributes($params);
 		
+		if (!empty($params['has_certificate_health'])) {
+			$model->has_certificate_health = 'YES';
+		} else {
+			$model->has_certificate_health = 'NO';
+		}
+		
 		if($model->validate()) {
 			if (!$model->save()) {
 				throw new HttpException(400, "Не удалось сохранить информацию о медицинской карте");

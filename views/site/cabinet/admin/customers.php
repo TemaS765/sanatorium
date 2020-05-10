@@ -144,7 +144,7 @@ use app\models\Order;
 
                         <div class="customers__button-box">
                             <button class="customers__button services-btn">Дополнительные услуги</button>
-                            <a href="" class="customers__button">Путёвка</a>
+                            <a target="_blank" href="/site/permit?customer_id=<?= $customer->id ?>" class="customers__button">Путёвка</a>
                             <button class="customers__button del-btn -js-btn-del-customer"  data-cid="<?= $customer->id ?>">Удалить</button>
                         </div>
                         <!-- /.customers__button-box -->

@@ -13,6 +13,7 @@ class MedicalCardForm extends Model
     public $card_id;
     public $diet_id;
     public $treatment_ids = [];
+    public $has_certificate_health;
     
     /**
      * @return array the validation rules.
@@ -68,6 +69,7 @@ class MedicalCardForm extends Model
 		$medicalCard = MedicalCard::findOne(['id' => $this->card_id]);
 		$medicalCard->diet_id = $this->diet_id;
 		$medicalCard->treatment_ids = implode(',', $this->treatment_ids);
+		$medicalCard->has_certificate_health = $this->has_certificate_health;
 		return $medicalCard->save();
 	}
 }

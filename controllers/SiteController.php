@@ -14,10 +14,12 @@ use app\models\SignupForm;
 use app\models\Treatment;
 use app\models\TreatmentSchedule;
 use app\models\User;
+use Mpdf\Mpdf;
 use Yii;
 use yii\filters\AccessControl;
 use yii\helpers\VarDumper;
 use yii\web\Controller;
+use yii\web\HttpException;
 use yii\web\Response;
 use app\models\LoginForm;
 use app\models\ContactForm;
@@ -184,5 +186,43 @@ class SiteController extends Controller
 			'diets' => $diets,
 			'treatments' => $treatments
 		]);
+	}
+	
+	/**
+	 * Путевка
+	 * @throws HttpException
+	 * @throws \Mpdf\MpdfException
+	 * @throws \yii\base\InvalidConfigException
+	 */
+	public function actionPermit()
+	{
+		$params = \Yii::$app->request->get();
+		
+		if (empty($params['customer_id'])) {
+			throw new HttpException(400,"Обязательный параметр ID клиента");
+		}
+		
+		$customer = Customer::findOne(['id' => $params['customer_id']]);
+		
+		if (!$customer) {
+			throw new HttpException(400,"Клиент с не найден");
+		}
+		
+		$mpdf = new Mpdf(
+			[
+				'mode' => 'utf-8',
+				'format' => 'A4',
+				'orientation' => 'L'
+			]
+		);
+		
+		$mpdf->WriteHTML(
+			$this->renderPartial('permit',[
+				'customer' => $customer,
+				'housing' => Housing::findOne(['id' => $customer->order->housing_id])
+			])
+		);
+		
+		$mpdf->Output();
 	}
 }
