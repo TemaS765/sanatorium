@@ -35,7 +35,9 @@ class BookingController extends Controller
 		/** @var Order[] $orders */
 		$orders = Order::find()->where(
 			'(departure_date >= :date_to and arrival_date < :date_to) OR '.
-			'(arrival_date >= :date_from and arrival_date <= :date_to)',
+			'(arrival_date >= :date_from and arrival_date <= :date_to) OR '.
+			'(:date_from BETWEEN arrival_date AND departure_date) OR '.
+			'(:date_to BETWEEN arrival_date AND departure_date)',
 			[
 				':date_from' => $date_from,
 				':date_to' => $date_to
